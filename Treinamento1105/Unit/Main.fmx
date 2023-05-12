@@ -60,6 +60,7 @@ object FormMain: TFormMain
       TabOrder = 5
       Text = 'Sair'
       TextSettings.Font.StyleExt = {00070000000000000004000000}
+      OnClick = SairClick
     end
   end
   object Rectangle1: TRectangle
@@ -69,6 +70,15 @@ object FormMain: TFormMain
     Size.Height = 50.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
+    object Titulo: TLabel
+      StyledSettings = [Family, FontColor]
+      Position.X = 80.000000000000000000
+      Position.Y = 25.000000000000000000
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Text = 'Selecionado:'
+      TabOrder = 0
+    end
   end
   object Rectangle2: TRectangle
     Align = Bottom
@@ -91,15 +101,10 @@ object FormMain: TFormMain
     StyledSettings = [Style, FontColor]
     TabOrder = 3
     Options = [ColumnResize, ColumnMove, ColLines, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
-    Viewport.Width = 560.000000000000000000
-    Viewport.Height = 380.000000000000000000
-  end
-  object ShadowEffect1: TShadowEffect
-    Distance = 3.000000000000000000
-    Direction = 45.000000000000000000
-    Softness = 0.300000011920929000
-    Opacity = 0.600000023841857900
-    ShadowColor = claBlack
+    OnCellClick = Grid1CellClick
+    OnCellDblClick = Grid1CellDblClick
+    Viewport.Width = 556.000000000000000000
+    Viewport.Height = 355.000000000000000000
   end
   object BindSourceDB1: TBindSourceDB
     DataSet = DataModule1.qryPesq

@@ -45,7 +45,7 @@ procedure TForm2.alterarCliente(cliente: string; empresa: string; linha : intege
 
 begin
 
-          ShowMessage('Alterando cliente: ' + cliente + ' da empresa ' + empresa);
+          ShowMessage('Alterando cliente: ' + cliente + ' da empresa ' + empresa + ' id: '+ linha.ToString);
           id := linha;
           
 end;
@@ -66,7 +66,7 @@ var novCliente, novEmpresa :String;
   if (novCliente <> '') and (novEmpresa <> '') then
     begin
         ShowMessage('Registrando');
-        //ShowMessage(id.ToString);
+        ShowMessage(id.ToString);
         // Realize a alteração no banco de dados usando o TFDQuery
         DataModule1.qryExec.Close;
         DataModule1.qryExec.SQL.Clear;
@@ -81,7 +81,6 @@ var novCliente, novEmpresa :String;
         DataModule1.qryPesq.Refresh;
 
         ShowMessage('Registro alterado com sucesso');
-         Close;
 
       
     end;
@@ -96,7 +95,6 @@ procedure TForm2.btnCancelarClick(Sender: TObject);
 begin
        ShowMessage('Cancelado');
        Close;
-
 end;
 
 

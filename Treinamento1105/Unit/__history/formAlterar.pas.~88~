@@ -66,28 +66,37 @@ var novCliente, novEmpresa :String;
   if (novCliente <> '') and (novEmpresa <> '') then
     begin
         ShowMessage('Registrando');
-        ShowMessage(id.ToString);
+        //ShowMessage(id.ToString);
         // Realize a alteração no banco de dados usando o TFDQuery
         DataModule1.qryExec.Close;
         DataModule1.qryExec.SQL.Clear;
 
-        DataModule1.qryExec.SQL.Add('UPDATE CLIENTE SET sCLI_Nome = :Cliente, sCLI_Empresa = :Empresa WHERE iCLI_id = :id');
-        DataModule1.qryExec.ParamByName('Cliente').AsString := cliente;
-        DataModule1.qryExec.ParamByName('Empresa').AsString := empresa;
-        //DataModule1.qryPesq.ParamByName('ID').AsInteger := id;
+        DataModule1.qryExec.SQL.Add('UPDATE CLIENTE SET sCLI_Nome = :Cliente, sCLI_Empresa = :Empresa WHERE iCLI_id = :ID');
+        DataModule1.qryExec.ParamByName('Cliente').AsString := novCliente;
+        DataModule1.qryExec.ParamByName('Empresa').AsString := novEmpresa;
+        DataModule1.qryExec.ParamByName('ID').AsInteger := id;
         DataModule1.qryExec.ExecSQL;
         DataModule1.qryExec.Close;
 
+        DataModule1.qryPesq.Refresh;
+
         ShowMessage('Registro alterado com sucesso');
+         Close;
 
       
     end;
+  
+
+
+
+
 end;
 
 procedure TForm2.btnCancelarClick(Sender: TObject);
 begin
        ShowMessage('Cancelado');
        Close;
+
 end;
 
 

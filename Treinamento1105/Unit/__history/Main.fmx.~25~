@@ -1,7 +1,7 @@
 object FormMain: TFormMain
   Left = 0
   Top = 0
-  Caption = 'Main'
+  Caption = 'Execu'#231#227'o'
   ClientHeight = 480
   ClientWidth = 640
   FormFactor.Width = 320
@@ -17,38 +17,50 @@ object FormMain: TFormMain
     Size.PlatformDefault = False
     Stroke.Kind = None
     object Alterar: TButton
-      Position.Y = 96.000000000000000000
+      StyledSettings = [Size, FontColor]
+      Position.Y = 97.000000000000000000
       Size.Width = 80.000000000000000000
       Size.Height = 88.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 3
       Text = 'Alterar'
+      TextSettings.Font.Family = 'Arial'
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
       OnClick = AlterarClick
     end
     object Excluir: TButton
-      Position.Y = 189.000000000000000000
+      StyledSettings = [Family, Size, FontColor]
+      Position.Y = 195.000000000000000000
       Size.Width = 80.000000000000000000
       Size.Height = 88.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 4
       Text = 'Excluir'
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      OnClick = ExcluirClick
     end
     object Incluir: TButton
-      Position.Y = 3.000000000000000000
+      StyledSettings = [FontColor]
       Size.Width = 80.000000000000000000
       Size.Height = 88.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
       Text = 'Incluir'
+      TextSettings.Font.Family = 'Arial'
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
       OnClick = IncluirClick
     end
     object Sair: TButton
-      Position.Y = 282.000000000000000000
+      StyledSettings = [Family, Size, FontColor]
+      Position.Y = 293.000000000000000000
       Size.Width = 80.000000000000000000
       Size.Height = 88.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 5
       Text = 'Sair'
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      OnClick = SairClick
     end
   end
   object Rectangle1: TRectangle
@@ -58,6 +70,15 @@ object FormMain: TFormMain
     Size.Height = 50.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
+    object Titulo: TLabel
+      StyledSettings = [Family, FontColor]
+      Position.X = 80.000000000000000000
+      Position.Y = 25.000000000000000000
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Text = 'Selecionado:'
+      TabOrder = 0
+    end
   end
   object Rectangle2: TRectangle
     Align = Bottom
@@ -75,7 +96,13 @@ object FormMain: TFormMain
     Size.Width = 560.000000000000000000
     Size.Height = 380.000000000000000000
     Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Verdana'
+    TextSettings.Font.Size = 16.000000000000000000
+    StyledSettings = [Style, FontColor]
     TabOrder = 3
+    Options = [ColumnResize, ColumnMove, ColLines, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
+    OnCellClick = Grid1CellClick
+    OnCellDblClick = Grid1CellDblClick
     Viewport.Width = 556.000000000000000000
     Viewport.Height = 355.000000000000000000
   end

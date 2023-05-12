@@ -61,13 +61,12 @@ var
 begin
   if (linha > 0) then
   begin
-  ShowMessage(linha.ToString);
-//    cliente := DataModule1.qryPesq.FieldByName('sCLI_Nome').AsString;
-//    empresa := DataModule1.qryPesq.FieldByName('sCLI_Empresa').AsString;
-//    DataModule1.qryPesq.
-//    alterar := TForm2.Create(Self);
-//    alterar.Show;
-//    alterar.alterarCliente(cliente, empresa, linha);
+    cliente := DataModule1.qryPesq.FieldByName('sCLI_Nome').AsString;
+    empresa := DataModule1.qryPesq.FieldByName('sCLI_Empresa').AsString;
+    linha := DataModule1.qryPesq.FieldByName('iCLI_id').AsInteger;
+    alterar := TForm2.Create(Self);
+    alterar.Show;
+    alterar.alterarCliente(cliente, empresa, linha);
   end;
 end;
 
@@ -92,7 +91,6 @@ procedure TFormMain.AlterarClick(Sender: TObject);
 var linha : Integer;
 begin
   linha := DataModule1.qryPesq.RecNo;
-
   AlteracaoCliente(linha);
 end;
 
@@ -112,6 +110,8 @@ procedure TFormMain.SairClick(Sender: TObject);
   begin
     DataModule1.FDConnection1.Close;
     Application.Terminate;
+    Close;
+
   end;
 
 

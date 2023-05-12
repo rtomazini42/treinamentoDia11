@@ -27,13 +27,15 @@ type
     BindingsList1: TBindingsList;
     LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource;
     Rectangle3: TRectangle;
-    ShadowEffect1: TShadowEffect;
+    Titulo: TLabel;
     procedure IncluirClick(Sender: TObject);
    // procedure AlterarClick(Sender: TObject);
     procedure AlteracaoCliente(linha: Integer);
     procedure AlterarClick(Sender: TObject);
     procedure ExcluirClick(Sender: TObject);
     procedure SairClick(Sender: TObject);
+    procedure Grid1CellClick(const Column: TColumn; const Row: Integer);
+    procedure Grid1CellDblClick(const Column: TColumn; const Row: Integer);
 
 
   private
@@ -61,13 +63,12 @@ var
 begin
   if (linha > 0) then
   begin
-  ShowMessage(linha.ToString);
     cliente := DataModule1.qryPesq.FieldByName('sCLI_Nome').AsString;
     empresa := DataModule1.qryPesq.FieldByName('sCLI_Empresa').AsString;
-//    DataModule1.qryPesq.
+    linha := DataModule1.qryPesq.FieldByName('iCLI_id').AsInteger;
     alterar := TForm2.Create(Self);
     alterar.Show;
-    alterar.alterarCliente(cliente, empresa);
+    alterar.alterarCliente(cliente, empresa, linha);
   end;
 end;
 
@@ -107,10 +108,23 @@ var
   end;
 end;
 
+procedure TFormMain.Grid1CellClick(const Column: TColumn; const Row: Integer);
+begin
+  Titulo.Text := DataModule1.qryPesq.FieldByName('sCLI_Nome').AsString;
+end;
+
+procedure TFormMain.Grid1CellDblClick(const Column: TColumn;
+  const Row: Integer);
+begin
+  ShowMessage('Empresa:' + DataModule1.qryPesq.FieldByName('sCLI_Empresa').AsString + 'Cliente' + DataModule1.qryPesq.FieldByName('sCLI_Nome').AsString )
+end;
+
 procedure TFormMain.SairClick(Sender: TObject);
   begin
     DataModule1.FDConnection1.Close;
     Application.Terminate;
+    Close;
+
   end;
 
 
