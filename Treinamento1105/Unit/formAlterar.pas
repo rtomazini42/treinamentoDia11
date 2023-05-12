@@ -14,20 +14,26 @@ type
     Rectangle3: TRectangle;
     btnAlterar: TButton;
     btnCancelar: TButton;
+    entradaCliente: TEdit;
+    entradaEmpresa: TEdit;
     procedure btnAlterarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+
 
   private
     { Private declarations }
   public
-  entradaCliente: TEdit;
-  entradaEmpresa: TEdit;
-  procedure alterarCliente(cliente: string; empresa: string; linha : Integer);
+
+  procedure alterarCliente(cliente: string; empresa: string; linha : integer);
   end;
 
 var
   Form2: TForm2;
-  var id: Integer;
+  id : integer;
+  aux : string;
+  cliente: string; empresa: string;
+
+
 
 implementation
 
@@ -35,13 +41,13 @@ implementation
 
 
 
-procedure TForm2.alterarCliente(cliente: string; empresa: string; linha: Integer);
+procedure TForm2.alterarCliente(cliente: string; empresa: string; linha : integer);
 
 begin
 
+          ShowMessage('Alterando cliente: ' + cliente + ' da empresa ' + empresa + ' id: '+ linha.ToString);
           id := linha;
-          ShowMessage('Alterando cliente: ' + cliente + ' da empresa ' + empresa);
-
+          
 end;
 
 
@@ -50,41 +56,39 @@ end;
 
 
 procedure TForm2.btnAlterarClick(Sender: TObject);
-var
-  cliente, empresa: string;
 
 begin
 
-  cliente := entradaCliente.Text;
-  empresa := entradaEmpresa.Text;
+var novCliente, novEmpresa :String;
+  novCliente := entradaCliente.Text;
+  novEmpresa := entradaEmpresa.Text;
 
-  // Verifica se os campos estão preenchidos
-  if (cliente <> '') and (empresa <> '') then
-  begin
-    //id := FIDCliente; // Se estiver usando uma variável global
-
-    cliente := entradaCliente.Text;
-    empresa := entradaEmpresa.Text;
-
-    // Verifica se os campos estão preenchidos
-    if (cliente <> '') and (empresa <> '') then
+  if (novCliente <> '') and (novEmpresa <> '') then
     begin
+        ShowMessage('Registrando');
+        ShowMessage(id.ToString);
         // Realize a alteração no banco de dados usando o TFDQuery
         DataModule1.qryExec.Close;
         DataModule1.qryExec.SQL.Clear;
+
         DataModule1.qryExec.SQL.Add('UPDATE CLIENTE SET sCLI_Nome = :Cliente, sCLI_Empresa = :Empresa WHERE iCLI_id = :ID');
-        DataModule1.qryExec.ParamByName('Cliente').AsString := cliente;
-        DataModule1.qryExec.ParamByName('Empresa').AsString := empresa;
+        DataModule1.qryExec.ParamByName('Cliente').AsString := novCliente;
+        DataModule1.qryExec.ParamByName('Empresa').AsString := novEmpresa;
         DataModule1.qryExec.ParamByName('ID').AsInteger := id;
         DataModule1.qryExec.ExecSQL;
         DataModule1.qryExec.Close;
 
-        ShowMessage('Registro alterado com sucesso');
-    end
-  end
+        DataModule1.qryPesq.Refresh;
 
-  else
-    ShowMessage('Preencha todos os campos');
+        ShowMessage('Registro alterado com sucesso');
+
+      
+    end;
+  
+
+
+
+
 end;
 
 procedure TForm2.btnCancelarClick(Sender: TObject);

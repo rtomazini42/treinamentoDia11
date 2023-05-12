@@ -8,7 +8,8 @@ uses
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, System.Rtti,
   FMX.Grid.Style, FMX.ScrollBox, FMX.Grid, Data.Bind.EngExt, Fmx.Bind.DBEngExt,
   Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
-  Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, DACs, formIncluir, formAlterar;
+  Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, DACs, formIncluir, formAlterar,
+  FMX.Effects;
 
 
 //uses DACs;
@@ -26,6 +27,7 @@ type
     BindingsList1: TBindingsList;
     LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource;
     Rectangle3: TRectangle;
+    ShadowEffect1: TShadowEffect;
     procedure IncluirClick(Sender: TObject);
    // procedure AlterarClick(Sender: TObject);
     procedure AlteracaoCliente(linha: Integer);
@@ -55,14 +57,13 @@ procedure TFormMain.AlteracaoCliente(linha: Integer);
 var
   alterar: TForm2;
   cliente, empresa: string;
+  tipo : string;
 begin
   if (linha > 0) then
   begin
-
     cliente := DataModule1.qryPesq.FieldByName('sCLI_Nome').AsString;
     empresa := DataModule1.qryPesq.FieldByName('sCLI_Empresa').AsString;
-    //ShowMessage(empresa);
-
+    linha := DataModule1.qryPesq.FieldByName('iCLI_id').AsInteger;
     alterar := TForm2.Create(Self);
     alterar.Show;
     alterar.alterarCliente(cliente, empresa, linha);
@@ -90,7 +91,6 @@ procedure TFormMain.AlterarClick(Sender: TObject);
 var linha : Integer;
 begin
   linha := DataModule1.qryPesq.RecNo;
-
   AlteracaoCliente(linha);
 end;
 

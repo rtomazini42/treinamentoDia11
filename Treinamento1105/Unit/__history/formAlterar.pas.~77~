@@ -1,0 +1,78 @@
+unit formAlterar;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
+  FMX.Controls.Presentation, FMX.Edit, FMX.Objects, DACs;
+
+type
+  TForm2 = class(TForm)
+    Rectangle1: TRectangle;
+    Rectangle2: TRectangle;
+    Rectangle3: TRectangle;
+    btnAlterar: TButton;
+    btnCancelar: TButton;
+    entradaCliente: TEdit;
+    entradaEmpresa: TEdit;
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    procedure alterarCliente(cliente: string; empresa: string; linha: integer);
+  end;
+
+var
+  Form2: TForm2;
+  cliente: string;
+  empresa: string;
+
+implementation
+
+{$R *.fmx}
+
+procedure TForm2.alterarCliente(cliente: string; empresa: string; linha: integer);
+begin
+  ShowMessage('Alterando cliente: ' + cliente + ' da empresa ' + empresa + ' id: ' + linha.ToString);
+end;
+
+procedure TForm2.btnAlterarClick(Sender: TObject);
+var
+  novCliente, novEmpresa: string;
+begin
+  novCliente := entradaCliente.Text;
+  novEmpresa := entradaEmpresa.Text;
+
+  if (novCliente <> '') and (novEmpresa <> '') then
+  begin
+    cliente := novCliente; // Atribui o valor às variáveis globais
+    empresa := novEmpresa;
+
+    ShowMessage('Registrando');
+    alterarCliente(cliente, empresa, id); // Chama o método alterarCliente com os valores atualizados
+
+    // Realize a alteração no banco de dados usando o TFDQuery
+    DataModule1.qryExec.Close;
+    DataModule1.qryExec.SQL.Clear;
+    DataModule1.qryExec.SQL.Add('UPDATE CLIENTE SET sCLI_Nome = :Cliente, sCLI_Empresa = :Empresa WHERE iCLI_id = :ID');
+    DataModule1.qryExec.ParamByName('Cliente').AsString := cliente;
+    DataModule1.qryExec.ParamByName('Empresa').AsString := empresa;
+    DataModule1.qryExec.ParamByName('ID').AsInteger := id;
+    DataModule1.qryExec.ExecSQL;
+    DataModule1.qryExec.Close;
+
+    ShowMessage('Registro alterado com sucesso');
+  end;
+end;
+
+procedure TForm2.btnCancelarClick(Sender: TObject);
+begin
+  ShowMessage('Cancelado');
+  Close;
+end;
+
+end.
+

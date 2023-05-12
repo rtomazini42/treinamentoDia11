@@ -1,0 +1,114 @@
+object FormMain: TFormMain
+  Left = 0
+  Top = 0
+  Caption = 'Execu'#231#227'o'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Rectangle3: TRectangle
+    Align = Left
+    Fill.Color = claCornflowerblue
+    Position.Y = 50.000000000000000000
+    Size.Width = 80.000000000000000000
+    Size.Height = 380.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    object Alterar: TButton
+      StyledSettings = [Size, FontColor]
+      Position.Y = 97.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 88.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'Alterar'
+      TextSettings.Font.Family = 'Arial'
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      OnClick = AlterarClick
+    end
+    object Excluir: TButton
+      StyledSettings = [Family, Size, FontColor]
+      Position.Y = 195.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 88.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'Excluir'
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      OnClick = ExcluirClick
+    end
+    object Incluir: TButton
+      StyledSettings = [FontColor]
+      Size.Width = 80.000000000000000000
+      Size.Height = 88.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Incluir'
+      TextSettings.Font.Family = 'Arial'
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      OnClick = IncluirClick
+    end
+    object Sair: TButton
+      StyledSettings = [Family, Size, FontColor]
+      Position.Y = 293.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 88.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = 'Sair'
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+  end
+  object Rectangle1: TRectangle
+    Align = Top
+    Fill.Color = claCornflowerblue
+    Size.Width = 640.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+  end
+  object Rectangle2: TRectangle
+    Align = Bottom
+    Fill.Color = claCornflowerblue
+    Position.Y = 430.000000000000000000
+    Size.Width = 640.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+  end
+  object Grid1: TGrid
+    Align = Client
+    CanFocus = True
+    ClipChildren = True
+    Size.Width = 560.000000000000000000
+    Size.Height = 380.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Verdana'
+    TextSettings.Font.Size = 16.000000000000000000
+    StyledSettings = [Style, FontColor]
+    TabOrder = 3
+    Options = [ColumnResize, ColumnMove, ColLines, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
+    Viewport.Width = 560.000000000000000000
+    Viewport.Height = 380.000000000000000000
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = DataModule1.qryPesq
+    ScopeMappings = <>
+    Left = 496
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 564
+    Top = 65533
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = Grid1
+      Columns = <>
+    end
+  end
+end
