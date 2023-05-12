@@ -1,0 +1,1 @@
+# Apenas para treinamento de Delphi

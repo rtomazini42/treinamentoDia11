@@ -1,0 +1,99 @@
+unit DACs;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.FMXUI.Wait,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Phys.SQLite,
+  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
+  FireDAC.Phys.SQLiteWrapper.Stat, System.IOUtils;
+
+type
+  TDataModule1 = class(TDataModule)
+    FDConnection1: TFDConnection;
+    qryPesq: TFDQuery;
+    qryExec: TFDQuery;
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DataModule1: TDataModule1;
+
+implementation
+
+{%CLASSGROUP 'FMX.Controls.TControl'}
+
+{$R *.dfm}
+
+
+procedure TDataModule1.DataModuleCreate(Sender: TObject);
+var
+  TableExists: Boolean;
+begin
+
+    {$IF DEFINED(MSWINDOWS)}
+      FDConnection1.Params.Values['Database']    := 'C:\Users\Tomazini\Desktop\Treinamento1105\Treinamento1105\Dados\Clientes';
+    {$ELSE}
+      FDConnection1.Params.Values['Database']    := TPath.Combine(TPath.GetDocumentsPath, 'Cliente.db');
+    {$ENDIF}
+  FDConnection1.Connected := True;
+
+  TableExists := False;
+
+  // Verifica se a tabela CLIENTE já existe no banco de dados
+  qryPesq.Close;
+  qryPesq.SQL.Clear;
+  qryPesq.SQL.Add('SELECT 1 FROM sqlite_master WHERE type = ''table'' AND name = ''CLIENTE''');
+  qryPesq.Open();
+  TableExists := not qryPesq.IsEmpty;
+  qryPesq.Close;
+
+  if not TableExists then
+  begin
+    // Cria a tabela CLIENTE, caso ela não exista
+    qryExec.Close;
+    qryExec.SQL.Clear;
+    qryExec.SQL.Add('CREATE TABLE CLIENTE(');
+    qryExec.SQL.Add('iCLI_id   INTEGER PRIMARY KEY AUTOINCREMENT,');
+    qryExec.SQL.Add('sCLI_Nome Varchar(30),');
+    qryExec.SQL.Add('sCLI_Empresa Varchar(30))');
+    qryExec.ExecSQL;
+
+    // Insere um registro de exemplo na tabela CLIENTE
+    qryExec.SQL.Clear;
+    qryExec.SQL.Add('INSERT INTO CLIENTE (iCLI_id, sCLI_Nome, sCLI_Empresa) VALUES (1, ''Cliente 1'', ''Empresa 1'')');
+    qryExec.ExecSQL;
+
+    qryExec.SQL.Clear;
+    qryExec.SQL.Add('INSERT INTO CLIENTE (iCLI_id, sCLI_Nome, sCLI_Empresa) VALUES (2, ''Cliente 2'', ''Empresa 2'')');
+    qryExec.ExecSQL;
+
+    qryExec.SQL.Clear;
+    qryExec.SQL.Add('INSERT INTO CLIENTE (iCLI_id, sCLI_Nome, sCLI_Empresa) VALUES (3, ''Cliente 3'', ''Empresa 3'')');
+    qryExec.ExecSQL;
+
+    qryExec.SQL.Clear;
+    qryExec.SQL.Add('INSERT INTO CLIENTE (iCLI_id, sCLI_Nome, sCLI_Empresa) VALUES (4, ''Cliente 4'', ''Empresa 4'')');
+    qryExec.ExecSQL;
+
+
+  end;
+
+  // Realiza uma consulta na tabela CLIENTE
+  qryPesq.Close;
+  qryPesq.SQL.Clear;
+  qryPesq.SQL.Add('SELECT * FROM CLIENTE');
+  qryPesq.Open();
+end;
+
+
+
+
+end.

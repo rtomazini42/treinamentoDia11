@@ -1,0 +1,99 @@
+object FormMain: TFormMain
+  Left = 0
+  Top = 0
+  Caption = 'Main'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Rectangle3: TRectangle
+    Align = Left
+    Fill.Color = claCornflowerblue
+    Position.Y = 50.000000000000000000
+    Size.Width = 80.000000000000000000
+    Size.Height = 380.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    object Alterar: TButton
+      Position.Y = 96.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 88.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'Alterar'
+      OnClick = AlterarClick
+    end
+    object Excluir: TButton
+      Position.Y = 189.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 88.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'Excluir'
+    end
+    object Incluir: TButton
+      Position.Y = 3.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 88.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Incluir'
+      OnClick = IncluirClick
+    end
+    object Sair: TButton
+      Position.Y = 282.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 88.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = 'Sair'
+    end
+  end
+  object Rectangle1: TRectangle
+    Align = Top
+    Fill.Color = claCornflowerblue
+    Size.Width = 640.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+  end
+  object Rectangle2: TRectangle
+    Align = Bottom
+    Fill.Color = claCornflowerblue
+    Position.Y = 430.000000000000000000
+    Size.Width = 640.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+  end
+  object Grid1: TGrid
+    Align = Client
+    CanFocus = True
+    ClipChildren = True
+    Size.Width = 560.000000000000000000
+    Size.Height = 380.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Viewport.Width = 560.000000000000000000
+    Viewport.Height = 380.000000000000000000
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = DataModule1.qryPesq
+    ScopeMappings = <>
+    Left = 496
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 564
+    Top = 65533
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = Grid1
+      Columns = <>
+    end
+  end
+end
