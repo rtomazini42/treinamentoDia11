@@ -55,6 +55,8 @@ implementation
 
 
 
+
+
 procedure TFormMain.AlteracaoCliente(linha: Integer);
 var
   alterar: TForm2;
@@ -98,11 +100,18 @@ end;
 
 
 procedure TFormMain.ExcluirClick(Sender: TObject);
-begin
 var
   id: Integer;
+  resposta: TModalResult;
+begin
+  id := DataModule1.qryPesq.FieldByName('iCLI_id').AsInteger;
+
+
+  ShowMessage('O cliente com os seguintes atributos está selecionado:'+ #13 +' Empresa: ' + DataModule1.qryPesq.FieldByName('sCLI_Empresa').AsString + #13 +'Cliente: ' + DataModule1.qryPesq.FieldByName('sCLI_Nome').AsString );
+  resposta := MessageDlg('Tem certeza que deseja excluir o cliente?', TMsgDlgType.mtConfirmation, [TMsgDlgBtn.mbYes, TMsgDlgBtn.mbNo], 0);
+
+  if resposta = mrYes then
   begin
-    id := DataModule1.qryPesq.FieldByName('iCLI_id').AsInteger;
     DataModule1.ExcluirCliente(id);
     ShowMessage('Cliente excluído com sucesso.');
   end;
